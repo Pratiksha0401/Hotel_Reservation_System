@@ -18,17 +18,17 @@ public class Hotel_Reservation_system {
  		//setting values for lakewood
  	    lake = new Hotel("Lakewood");
  	    lake.setRegularWeekDay(110);
- 	    
+ 	    lake.setRegularWeekEnd(90);
  		 		
  		//setting values for bridgewood
  	    bridge = new Hotel("Bridgewood");
- 	    bridge.setRegularWeekDay(160);
- 	   
+ 	    bridge.setRegularWeekDay(150);
+ 	    bridge.setRegularWeekEnd(50);
  				
  		//setting values for ridgewood   
  	    ridge = new Hotel("Ridgewood");
  	    ridge.setRegularWeekDay(220);
- 	    
+ 	    ridge.setRegularWeekEnd(150);
  		
  		 //int index = date.indexOf(":");
  	     //String type = date.substring(0, index);
@@ -58,20 +58,21 @@ public class Hotel_Reservation_system {
      	}
      	
    //implementing the min method
-     private static String min(int a, int b, int c) {
-	     if (a < b && a < c) {
-	    	 return lake.getHotelName();
-	     } else if (b < a && b < c) {
-	    	 return bridge.getHotelName();
-	     } else if (c < a && c < b) {
-	    	 return ridge.getHotelName();
-	     } else if (a == b || b == c) {
-	    	 return bridge.getHotelName();
-	     } else if (c == a) {
-	    	 return ridge.getHotelName();
-	     } else {
-	    	 return lake.getHotelName();
-	     } 
+     public static  String min(int a, int b, int c) {
+ 		if(a < c && a < c) {
+ 			return lake.getHotelName();
+ 		}else if(b<a && b < c) {
+ 			return bridge.getHotelName();
+ 		}else if(a==b ) {
+ 			return (lake.getHotelName()+" "+bridge.getHotelName());
+ 		}else if(b==c) {
+ 			return (bridge.getHotelName()+" "+ridge.getHotelName());
+ 		}else if(a==c) {
+ 			return (lake.getHotelName()+" "+ridge.getHotelName());
+ 		}
+ 		else {
+ 			return ridge.getHotelName();
+ 		}
  	}
 }
  
