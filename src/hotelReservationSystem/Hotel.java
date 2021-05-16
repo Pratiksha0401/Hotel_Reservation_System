@@ -3,7 +3,6 @@ package hotelReservationSystem;
 public class Hotel {
 	String hotelName;
     private int regularWeekDay;
-    private int regularWeekEnd;
     
 	public Hotel(String hotelName) {
 		this.hotelName = hotelName;
@@ -19,12 +18,6 @@ public class Hotel {
 	}
 	public void setRegularWeekDay(int regularWeekDay) {
 		this.regularWeekDay = regularWeekDay;
-	}
-	public int getRegularWeekEnd() {
-		return regularWeekEnd;
-	}
-	public void setRegularWeekEnd(int regularWeekEnd) {
-		this.regularWeekEnd = regularWeekEnd;
 	}
 	
 }

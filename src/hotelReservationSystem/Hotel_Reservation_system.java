@@ -18,17 +18,17 @@ public class Hotel_Reservation_system {
  		//setting values for lakewood
  	    lake = new Hotel("Lakewood");
  	    lake.setRegularWeekDay(110);
- 	    lake.setRegularWeekEnd(90);
+ 	    
  		 		
  		//setting values for bridgewood
  	    bridge = new Hotel("Bridgewood");
  	    bridge.setRegularWeekDay(160);
- 	    bridge.setRegularWeekEnd(60);;
+ 	   
  				
  		//setting values for ridgewood   
  	    ridge = new Hotel("Ridgewood");
  	    ridge.setRegularWeekDay(220);
- 	    ridge.setRegularWeekEnd(150);
+ 	    
  		
  		 //int index = date.indexOf(":");
  	     //String type = date.substring(0, index);
@@ -41,21 +41,13 @@ public class Hotel_Reservation_system {
  		
  		     if (day_index_start != -1) {
  			     String day = date.substring(day_index_start + 1, day_index_end);
- 			     if (day.equalsIgnoreCase("sun") || day.equalsIgnoreCase("sat")) {
- 				     
- 					     cost_lake += lake.getRegularWeekEnd();
- 					     cost_bridge += bridge.getRegularWeekEnd();
- 					     cost_ridge += ridge.getRegularWeekEnd();
- 				      }
- 			      else {
  				    
  					     cost_lake += lake.getRegularWeekDay();
  					     cost_bridge += bridge.getRegularWeekDay();
  					     cost_ridge += ridge.getRegularWeekDay();
  				     
  			     }
- 		     }
- 		    }  
+ 		     }  
  	    
  	     System.out.println("\nLakewood : "+cost_lake+"$");
 	     System.out.println("Bridgewood : "+cost_bridge+"$");
