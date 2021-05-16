@@ -42,9 +42,9 @@ public class Hotel_Reservation_system {
  		     if (day_index_start != -1) {
  			     String day = date.substring(day_index_start + 1, day_index_end);
  				    
- 					     cost_lake += lake.getRegularWeekDay();
- 					     cost_bridge += bridge.getRegularWeekDay();
- 					     cost_ridge += ridge.getRegularWeekDay();
+ 					     cost_lake += lake.getRegularWeekDay()+lake.getRegularWeekEnd();
+ 					     cost_bridge += bridge.getRegularWeekDay()+bridge.getRegularWeekEnd();
+ 					     cost_ridge += ridge.getRegularWeekDay()+ridge.getRegularWeekEnd();
  				     
  			     }
  		     }  
