@@ -17,16 +17,19 @@ public class Hotel_Reservation_system {
  		
  		//setting values for lakewood
  	    lake = new Hotel("Lakewood");
+ 	    lake.setRating(3);
  	    lake.setRegularWeekDay(110);
  	    lake.setRegularWeekEnd(90);
  		 		
  		//setting values for bridgewood
  	    bridge = new Hotel("Bridgewood");
+ 	    bridge.setRating(4);
  	    bridge.setRegularWeekDay(150);
  	    bridge.setRegularWeekEnd(50);
  				
  		//setting values for ridgewood   
  	    ridge = new Hotel("Ridgewood");
+ 	    ridge.setRating(5);
  	    ridge.setRegularWeekDay(220);
  	    ridge.setRegularWeekEnd(150);
  		
