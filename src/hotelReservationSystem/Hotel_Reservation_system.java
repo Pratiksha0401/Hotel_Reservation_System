@@ -3,15 +3,16 @@ package hotelReservationSystem;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Comparator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 public class Hotel_Reservation_system {
 	
 	private static Hotel lake, bridge, ridge;
 
     public static void main(String[] args) throws IOException {
-    System.out.println("Enter customer type : date ex.Reward: 16Mar2020(mon)");
-    BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-    String s = bf.readLine();
 
     //setting values for lakewood
     lake = new Hotel("Lakewood");
@@ -36,19 +37,25 @@ public class Hotel_Reservation_system {
     ridge.setRegularWeekEnd(150);
     ridge.setRewardedWeekDay(100);
     ridge.setRewardedWeekEnd(40);
-
-    int index = s.indexOf(":");
-    String type = s.substring(0, index);
+    
+    System.out.println("Enter customer type : date ex.Reward: 16Mar2020(mon)");
+    BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+    String date = bf.readLine();
+    dateValidation(date);
+    
+    if(dateValidation(date)==true) {
+    int index = date.indexOf(":");
+    String type = date.substring(0, index);
 
     int cost_lake = 0, cost_bridge = 0, cost_ridge = 0;
     int day_index_start = 0, day_index_end = 0;
 
     while (day_index_start != -1) {
-	     day_index_start = s.indexOf("(", day_index_start + 1);
-	     day_index_end = s.indexOf(")", day_index_end + 1);
+	     day_index_start = date.indexOf("(", day_index_start + 1);
+	     day_index_end = date.indexOf(")", day_index_end + 1);
 	
 	     if (day_index_start != -1) {
-		     String day = s.substring(day_index_start + 1, day_index_end);
+		     String day = date.substring(day_index_start + 1, day_index_end);
 		     if (day.equalsIgnoreCase("sun") || day.equalsIgnoreCase("sat")) {
 			     if (type.equalsIgnoreCase("reward")) {
 			    	 cost_lake += lake.getRewardedWeekEnd();
@@ -76,10 +83,17 @@ public class Hotel_Reservation_system {
 	     System.out.println("\nLakewood : "+cost_lake+"$");
 	     System.out.println("Bridgewood : "+cost_bridge+"$");
 	     System.out.println("Ridgewood : "+cost_ridge+"$");
-	
-	     String result = min(cost_lake, cost_bridge, cost_ridge);
-	     System.out.println("Cheapest price is of "+result);
-    }
+	     
+	     int result = Stream.of(cost_lake, cost_bridge, cost_ridge)
+			     .min(Comparator.comparing(Integer::valueOf))
+			     .get();
+		System.out.println("\nCheapestPrice: "+result+"$");
+	     
+	     String result1 = min(cost_lake, cost_bridge, cost_ridge);
+	     System.out.println("\nCheapest price is of "+result1);
+    }else
+    	System.out.println("Please Enter valid date");
+  }
 
     //implementing the min method
     private static String min(int a, int b, int c) {
@@ -97,6 +111,14 @@ public class Hotel_Reservation_system {
 	    	 return "Hotel : "+lake.getHotelName()+" with rating "+lake.getRating()+" Total Price : "+a+"$";
 	     }
     }
+    
+    public static boolean dateValidation(String date) {
+		String datePattern="^[A-Z a-z]{1,}[:][0-9]{1,}[A-Z a-z]{3,}[1-9]{1}[0-9]{3}[(][A-Z a-z]{3}[)][,][0-9]{1,}[A-Z a-z]{3,}[1-9]{1}[0-9]{3}[(][A-Z a-z]{3}[)]$";
+		Pattern P=Pattern.compile(datePattern);
+        Matcher m=P.matcher(date);
+        return m.matches();	
+		
+	}
 }
  
      
