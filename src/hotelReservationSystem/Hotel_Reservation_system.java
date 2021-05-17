@@ -38,7 +38,7 @@ public class Hotel_Reservation_system {
     ridge.setRewardedWeekDay(100);
     ridge.setRewardedWeekEnd(40);
     
-    System.out.println("Enter customer type : date ex.Reward: 16Mar2020(mon)");
+    System.out.println("Enter customer type : date ex.Reward:16Mar2020(mon),15Mar2020(sun)");
     BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
     String date = bf.readLine();
     dateValidation(date);
@@ -57,25 +57,25 @@ public class Hotel_Reservation_system {
 	     if (day_index_start != -1) {
 		     String day = date.substring(day_index_start + 1, day_index_end);
 		     if (day.equalsIgnoreCase("sun") || day.equalsIgnoreCase("sat")) {
-			     if (type.equalsIgnoreCase("reward")) {
+			     if (type.equalsIgnoreCase("regular")) {
+			    	 cost_lake += lake.getRegularWeekEnd();
+				     cost_bridge += bridge.getRegularWeekEnd();
+				     cost_ridge += ridge.getRegularWeekEnd();
+			    	 
+			     } else {
 			    	 cost_lake += lake.getRewardedWeekEnd();
 				     cost_bridge += bridge.getRewardedWeekEnd();
 				     cost_ridge += ridge.getRewardedWeekEnd();
-			     } else {
-				     cost_lake += lake.getRegularWeekEnd();
-				     cost_bridge += bridge.getRegularWeekEnd();
-				     cost_ridge += ridge.getRegularWeekEnd();
 			     }
 		     } else {
-			     if (type.equalsIgnoreCase("reward")) {
+			     if (type.equalsIgnoreCase("regular")) {
+			    	 cost_lake += lake.getRegularWeekDay();
+				     cost_bridge += bridge.getRegularWeekDay();
+				     cost_ridge += ridge.getRegularWeekDay();				     
+			     } else {
 			    	 cost_lake += lake.getRewardedWeekDay();
 				     cost_bridge += bridge.getRewardedWeekDay();
 				     cost_ridge += ridge.getRewardedWeekDay();
-				     
-			     } else {
-			    	 cost_lake += lake.getRegularWeekDay();
-				     cost_bridge += bridge.getRegularWeekDay();
-				     cost_ridge += ridge.getRegularWeekDay();
 			     }
 		     }
 	     }
