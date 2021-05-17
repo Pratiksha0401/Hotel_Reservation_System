@@ -89,14 +89,14 @@ public class Hotel_Reservation_system {
 			     .get();
 		System.out.println("\nCheapestPrice: "+result+"$");
 	     
-	     String result1 = min(cost_lake, cost_bridge, cost_ridge);
+	     String result1 = minPrice(cost_lake, cost_bridge, cost_ridge);
 	     System.out.println("\nCheapest price is of "+result1);
     }else
     	System.out.println("Please Enter valid date");
   }
 
     //implementing the min method
-    private static String min(int a, int b, int c) {
+    private static String minPrice(int a, int b, int c) {
 	     if (a < b && a < c) {
 	    	 return "Hotel :"+lake.getHotelName()+" with rating "+lake.getRating()+" Total Price : "+a+"$";
 	     } else if (b < a && b < c) {
