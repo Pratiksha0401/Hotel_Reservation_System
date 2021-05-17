@@ -6,101 +6,102 @@ import java.io.InputStreamReader;
 
 public class Hotel_Reservation_system {
 	
-	 private static Hotel lake, bridge, ridge;
+	private static Hotel lake, bridge, ridge;
 
-     public static void main(String[] args) throws IOException {
-    
-    	 System.out.println("Enter date  ex. 16Mar2020(mon)");
-         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-         String date = bf.readLine();
+    public static void main(String[] args) throws IOException {
+    System.out.println("Enter customer type : date ex.Reward: 16Mar2020(mon)");
+    BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+    String s = bf.readLine();
 
- 		
- 		//setting values for lakewood
- 	    lake = new Hotel("Lakewood");
- 	    lake.setRating(3);
- 	    lake.setRegularWeekDay(110);
- 	    lake.setRegularWeekEnd(90);
- 	    lake.setRewardedWeekDay(80);
- 	    lake.setRewardedWeekEnd(80);
- 		 		
- 		//setting values for bridgewood
- 	    bridge = new Hotel("Bridgewood");
- 	    bridge.setRating(4);
- 	    bridge.setRegularWeekDay(150);
- 	    bridge.setRegularWeekEnd(50);
- 	    bridge.setRewardedWeekEnd(110);
- 	    bridge.setRewardedWeekDay(50);
- 				
- 		//setting values for ridgewood   
- 	    ridge = new Hotel("Ridgewood");
- 	    ridge.setRating(5);
- 	    ridge.setRegularWeekDay(220);
- 	    ridge.setRegularWeekEnd(150);
- 	    ridge.setRewardedWeekDay(100);
- 	    ridge.setRewardedWeekDay(40);
+    //setting values for lakewood
+    lake = new Hotel("Lakewood");
+    lake.setRating(3);
+    lake.setRegularWeekDay(110);
+    lake.setRegularWeekEnd(90);
+    lake.setRewardedWeekDay(80);
+    lake.setRewardedWeekEnd(80);
 
- 		
- 		 //int index = date.indexOf(",");
- 	     //String type = date.substring(0, index);
- 	     int cost_lake = 0, cost_bridge = 0, cost_ridge = 0;
- 	     int day_index_start = 0, day_index_end = 0;
- 	     
- 	    while (day_index_start != -1) {
- 		     day_index_start = date.indexOf("(", day_index_start + 1);
- 		     day_index_end = date.indexOf(")", day_index_end + 1);
- 		
- 		     if (day_index_start != -1) {
- 			     String day = date.substring(day_index_start + 1, day_index_end);
- 		    	if (day.equalsIgnoreCase("sun") || day.equalsIgnoreCase("sat")) {
- 					     cost_lake += lake.getRegularWeekEnd();
- 					     cost_bridge += bridge.getRegularWeekEnd();
- 					     cost_ridge += ridge.getRegularWeekEnd();
- 				     
- 			     }
- 		     }
- 		     else {
- 		    	cost_lake += lake.getRegularWeekDay();
- 		    	cost_bridge += bridge.getRegularWeekDay();
- 		    	cost_ridge += ridge.getRegularWeekDay();
- 		     }
- 		 }  
- 	    
- 	     System.out.println("\nLakewood : "+cost_lake+"$");
+    //setting values for bridgewood
+    bridge = new Hotel("Bridgewood");
+    bridge.setRating(4);
+    bridge.setRegularWeekDay(160);
+    bridge.setRegularWeekEnd(60);
+    bridge.setRewardedWeekDay(110);
+    bridge.setRewardedWeekEnd(50);
+
+    //setting values for ridgewood   
+    ridge = new Hotel("Ridgewood");
+    ridge.setRating(5);
+    ridge.setRegularWeekDay(220);
+    ridge.setRegularWeekEnd(150);
+    ridge.setRewardedWeekDay(100);
+    ridge.setRewardedWeekEnd(40);
+
+    int index = s.indexOf(":");
+    String type = s.substring(0, index);
+
+    int cost_lake = 0, cost_bridge = 0, cost_ridge = 0;
+    int day_index_start = 0, day_index_end = 0;
+
+    while (day_index_start != -1) {
+	     day_index_start = s.indexOf("(", day_index_start + 1);
+	     day_index_end = s.indexOf(")", day_index_end + 1);
+	
+	     if (day_index_start != -1) {
+		     String day = s.substring(day_index_start + 1, day_index_end);
+		     if (day.equalsIgnoreCase("sun") || day.equalsIgnoreCase("sat")) {
+			     if (type.equalsIgnoreCase("reward")) {
+			    	 cost_lake += lake.getRewardedWeekEnd();
+				     cost_bridge += bridge.getRewardedWeekEnd();
+				     cost_ridge += ridge.getRewardedWeekEnd();
+			     } else {
+				     cost_lake += lake.getRegularWeekEnd();
+				     cost_bridge += bridge.getRegularWeekEnd();
+				     cost_ridge += ridge.getRegularWeekEnd();
+			     }
+		     } else {
+			     if (type.equalsIgnoreCase("reward")) {
+			    	 cost_lake += lake.getRewardedWeekDay();
+				     cost_bridge += bridge.getRewardedWeekDay();
+				     cost_ridge += ridge.getRewardedWeekDay();
+				     
+			     } else {
+			    	 cost_lake += lake.getRegularWeekDay();
+				     cost_bridge += bridge.getRegularWeekDay();
+				     cost_ridge += ridge.getRegularWeekDay();
+			     }
+		     }
+	     }
+    }
+	     System.out.println("\nLakewood : "+cost_lake+"$");
 	     System.out.println("Bridgewood : "+cost_bridge+"$");
 	     System.out.println("Ridgewood : "+cost_ridge+"$");
 	
 	     String result = min(cost_lake, cost_bridge, cost_ridge);
-	     
-	     int result2=totalPrice(cost_lake, cost_bridge, cost_ridge);
-	     System.out.println("Cheapest price is of "+result+" , Total :"+totalPrice(cost_lake, cost_bridge, cost_ridge));
-	     
-     	}
-     	
-   private static int totalPrice(int a, int b, int c) {
-	   if(a < c && a < c) {
-			return c;
-		}else if(b<a && b < c) {
-			return c;
-		}
-		else {
-			return c;
-		}
-	}
+	     System.out.println("Cheapest price is of "+result);
+    }
 
-//implementing the min method
-     public static  String min(int a, int b, int c) {
- 		if(a < c && a < b) {
- 			return (ridge.getHotelName());
- 		}else if(b<a && b < c) {
- 			return (ridge.getHotelName());
- 		}
- 		else {
- 			return (ridge.getHotelName());
- 		}
- 	}
+    //implementing the min method
+    private static String min(int a, int b, int c) {
+	     if (a < b && a < c) {
+	    	 return "Hotel :"+lake.getHotelName()+" with rating "+lake.getRating()+" Total Price : "+a+"$";
+	     } else if (b < a && b < c) {
+	    	 return "Hotel : "+bridge.getHotelName()+" with rating "+bridge.getRating()+" Total Price : "+b+"$";
+	     } else if (c < a && c < b) {
+	    	 return "Hotel : "+ridge.getHotelName()+" with rating "+ridge.getRating()+" Total Price : "+c+"$";
+	     } else if (a == b ) {
+	    	 return "Hotel : "+bridge.getHotelName()+" with rating "+bridge.getRating()+" Total Price : "+b+"$";
+	     } else if (c == a || b==c) {
+	    	 return "Hotel : "+ridge.getHotelName()+" with rating "+ridge.getRating()+" Total Price : "+c+"$";
+	     } else {
+	    	 return "Hotel : "+lake.getHotelName()+" with rating "+lake.getRating()+" Total Price : "+a+"$";
+	     }
+    }
+}
+ 
      
      	
-}
+
  
 
 
