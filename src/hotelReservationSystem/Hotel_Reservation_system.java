@@ -33,7 +33,7 @@ public class Hotel_Reservation_system {
  	    ridge.setRegularWeekDay(220);
  	    ridge.setRegularWeekEnd(150);
  		
- 		 //int index = date.indexOf(":");
+ 		 //int index = date.indexOf(",");
  	     //String type = date.substring(0, index);
  	     int cost_lake = 0, cost_bridge = 0, cost_ridge = 0;
  	     int day_index_start = 0, day_index_end = 0;
@@ -44,39 +44,76 @@ public class Hotel_Reservation_system {
  		
  		     if (day_index_start != -1) {
  			     String day = date.substring(day_index_start + 1, day_index_end);
- 				    
- 					     cost_lake += lake.getRegularWeekDay()+lake.getRegularWeekEnd();
- 					     cost_bridge += bridge.getRegularWeekDay()+bridge.getRegularWeekEnd();
- 					     cost_ridge += ridge.getRegularWeekDay()+ridge.getRegularWeekEnd();
+ 		    	if (day.equalsIgnoreCase("sun") || day.equalsIgnoreCase("sat")) {
+ 					     cost_lake += lake.getRegularWeekEnd();
+ 					     cost_bridge += bridge.getRegularWeekEnd();
+ 					     cost_ridge += ridge.getRegularWeekEnd();
  				     
  			     }
- 		     }  
+ 		     }
+ 		     else {
+ 		    	cost_lake += lake.getRegularWeekDay();
+ 		    	cost_bridge += bridge.getRegularWeekDay();
+ 		    	cost_ridge += ridge.getRegularWeekDay();
+ 		     }
+ 		 }  
  	    
  	     System.out.println("\nLakewood : "+cost_lake+"$");
 	     System.out.println("Bridgewood : "+cost_bridge+"$");
 	     System.out.println("Ridgewood : "+cost_ridge+"$");
 	
 	     String result = min(cost_lake, cost_bridge, cost_ridge);
-	     System.out.println("Cheapest price is of "+result);
+	     int result1 = minrating(cost_lake, cost_bridge, cost_ridge);
+	     int result2=totalPrice(cost_lake, cost_bridge, cost_ridge);
+	     System.out.println("Cheapest price is of "+result+" ,Rating "+result1+", Total :"+totalPrice(cost_lake, cost_bridge, cost_ridge));
+	     
      	}
      	
-   //implementing the min method
+   private static int totalPrice(int a, int b, int c) {
+	   if(a < c && a < c) {
+			return a;
+		}else if(b<a && b < c) {
+			return b;
+		}
+		else {
+			return b;
+		}
+	}
+
+//implementing the min method
      public static  String min(int a, int b, int c) {
  		if(a < c && a < c) {
- 			return lake.getHotelName();
+ 			return (lake.getHotelName());
  		}else if(b<a && b < c) {
- 			return bridge.getHotelName();
+ 			return (bridge.getHotelName());
  		}else if(a==b ) {
- 			return (lake.getHotelName()+" "+bridge.getHotelName());
+ 			return (lake.getHotelName());
  		}else if(b==c) {
- 			return (bridge.getHotelName()+" "+ridge.getHotelName());
+ 			return (bridge.getHotelName());
  		}else if(a==c) {
- 			return (lake.getHotelName()+" "+ridge.getHotelName());
+ 			return (lake.getHotelName());
  		}
  		else {
- 			return ridge.getHotelName();
+ 			return (ridge.getHotelName());
  		}
  	}
+     
+     public static  Integer minrating(int a, int b, int c) {
+  		if(a < c && a < c) {
+  			return (lake.getRating());
+  		}else if(b<a && b < c) {
+  			return (bridge.getRating());
+  		}else if(a==b ) {
+  			return (lake.getRating());
+  		}else if(b==c) {
+  			return (bridge.getRating());
+  		}else if(a==c) {
+  			return (lake.getRating());
+  		}
+  		else {
+  			return (ridge.getRating());
+  		}
+     }	
 }
  
 
