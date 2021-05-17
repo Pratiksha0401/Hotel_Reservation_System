@@ -20,18 +20,25 @@ public class Hotel_Reservation_system {
  	    lake.setRating(3);
  	    lake.setRegularWeekDay(110);
  	    lake.setRegularWeekEnd(90);
+ 	    lake.setRewardedWeekDay(80);
+ 	    lake.setRewardedWeekEnd(80);
  		 		
  		//setting values for bridgewood
  	    bridge = new Hotel("Bridgewood");
  	    bridge.setRating(4);
  	    bridge.setRegularWeekDay(150);
  	    bridge.setRegularWeekEnd(50);
+ 	    bridge.setRewardedWeekEnd(110);
+ 	    bridge.setRewardedWeekDay(50);
  				
  		//setting values for ridgewood   
  	    ridge = new Hotel("Ridgewood");
  	    ridge.setRating(5);
  	    ridge.setRegularWeekDay(220);
  	    ridge.setRegularWeekEnd(150);
+ 	    ridge.setRewardedWeekDay(100);
+ 	    ridge.setRewardedWeekDay(40);
+
  		
  		 //int index = date.indexOf(",");
  	     //String type = date.substring(0, index);
